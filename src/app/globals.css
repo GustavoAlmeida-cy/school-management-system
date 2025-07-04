@@ -87,9 +87,11 @@
   color: black !important;
   display: block !important;
   padding: 8px !important;
-  width: 100% !important;
+  width: fit-content !important;
+  min-width: 100% !important;
   height: fit-content !important;
-  margin: 5px !important;
+  margin: 4px !important;
+  margin-top: 6px !important;
   overflow: hidden !important;
 }
 

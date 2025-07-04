@@ -4,7 +4,7 @@ import React from "react";
 
 const TeacherPage = () => {
   return (
-    <div className="p-4 flex gap-4 flex-col md:flex-row">
+    <div className="flex-1 p-4 flex gap-4 flex-col md:flex-row">
       {/* Left */}
       <div className="w-full xl:w-2/3">
         <div className="h-full bg-white px-6 py-4 rounded-md">

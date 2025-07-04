@@ -4,7 +4,7 @@
 
 /* ===== Global ===== */
 * {
-  outline-color: white !important;
+  outline-color: white;
 }
 
 /* ===== React Calendar ===== */
@@ -85,8 +85,10 @@
 .rbc-event {
   border: none !important;
   color: black !important;
+  display: block !important;
   padding: 8px !important;
   width: 100% !important;
+  height: fit-content !important;
   margin: 5px !important;
   overflow: hidden !important;
 }

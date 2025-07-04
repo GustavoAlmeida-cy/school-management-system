@@ -19,10 +19,6 @@ const BigCalendar = () => {
 
   const [view, setView] = useState<View>(Views.WORK_WEEK);
 
-  const handleOnChangeView = (selectedView: View) => {
-    setView(selectedView);
-  };
-
   return (
     <Calendar
       localizer={localizer}
@@ -30,12 +26,13 @@ const BigCalendar = () => {
       startAccessor="start"
       endAccessor="end"
       defaultView={Views.WORK_WEEK}
-      views={{ work_week: true, day: true }}
       view={view}
-      onView={handleOnChangeView}
-      min={new Date(2025, 1, 0, 8, 0, 0)}
-      max={new Date(2025, 1, 0, 17, 0, 0)}
-      style={{ height: "90%" }}
+      views={[Views.WORK_WEEK, Views.DAY]}
+      onView={setView}
+      defaultDate={new Date(2024, 7, 12)} // 12 de agosto de 2024
+      min={new Date(2024, 7, 12, 8, 0)}
+      max={new Date(2024, 7, 12, 17, 0)}
+      style={{ height: "90vh" }}
     />
   );
 };

@@ -4,11 +4,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
 
-// USE LAZY LOADING
-
-// import TeacherForm from "./forms/TeacherForm";
-// import StudentForm from "./forms/StudentForm";
-
 const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>,
 });
@@ -58,7 +53,7 @@ const FormModal = ({
 
   const Form = () => {
     return type === "delete" && id ? (
-      <form action="" className="p-4 flex flex-col gap-4">
+      <form className="p-4 flex flex-col gap-4">
         <span className="text-center font-medium">
           All data will be lost. Are you sure you want to delete this {table}?
         </span>
@@ -69,7 +64,7 @@ const FormModal = ({
     ) : type === "create" || type === "update" ? (
       forms[table](type, data)
     ) : (
-      "Form not found!"
+      <p className="text-center text-red-500">Form not found!</p>
     );
   };
 
@@ -78,19 +73,32 @@ const FormModal = ({
       <button
         className={`${size} flex items-center justify-center rounded-full ${bgColor}`}
         onClick={() => setOpen(true)}
+        aria-label={`${type} ${table}`}
       >
-        <Image src={`/${type}.png`} alt="" width={16} height={16} />
+        <Image
+          src={`/${type}.png`}
+          alt={`${type} icon`}
+          width={16}
+          height={16}
+        />
       </button>
+
       {open && (
-        <div className="w-screen h-screen absolute left-0 top-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="bg-white p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center px-4">
+          <div className="bg-white rounded-md relative max-w-2xl w-full max-h-[90vh] p-6 sm:p-8 overflow-y-auto">
             <Form />
-            <div
-              className="absolute top-4 right-4 cursor-pointer"
+            <button
+              className="absolute top-4 right-4 p-2 rounded hover:bg-gray-100 transition"
               onClick={() => setOpen(false)}
+              aria-label="Close modal"
             >
-              <Image src="/close.png" alt="" width={14} height={14} />
-            </div>
+              <Image
+                src="/close.png"
+                alt="Close modal"
+                width={14}
+                height={14}
+              />
+            </button>
           </div>
         </div>
       )}

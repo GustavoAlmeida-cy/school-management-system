@@ -1,12 +1,9 @@
-"use client";
-
+import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { examsData, role } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
 type Exam = {
   id: number;
@@ -17,105 +14,66 @@ type Exam = {
 };
 
 const columns = [
-  { header: "Subject Name", accessor: "subject", className: "p-2" },
-  {
-    header: "Class",
-    accessor: "class",
-    className: "p-2",
-  },
-  {
-    header: "Teacher",
-    accessor: "teacher",
-    className: "hidden md:table-cell p-2",
-  },
-  {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell p-2",
-  },
-  {
-    header: "Actions",
-    accessor: "actions",
-    className: "p-2",
-  },
+  { header: "Subject Name", accessor: "subject" },
+  { header: "Class", accessor: "class" },
+  { header: "Teacher", accessor: "teacher", className: "hidden md:table-cell" },
+  { header: "Date", accessor: "date", className: "hidden md:table-cell" },
+  { header: "Actions", accessor: "action" },
 ];
 
-const ExamsListPage = () => {
-  const renderRow = (
-    item: Exam,
-    column: { header: string; accessor: string; className?: string }
-  ) => {
-    switch (column.accessor) {
-      case "info":
-        return (
+const ExamListPage = () => {
+  const renderRow = (item: Exam) => (
+    <tr
+      key={item.id}
+      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+    >
+      <td className="flex items-center gap-4 p-4">{item.subject}</td>
+      <td>{item.class}</td>
+      <td className="hidden md:table-cell">{item.teacher}</td>
+      <td className="hidden md:table-cell">{item.date}</td>
+      <td>
+        {(role === "admin" || role === "teacher") && (
           <div className="flex items-center gap-2">
-            <div className="flex flex-col gap-1">
-              <h3 className="font-semibold">{item.subject}</h3>
-              <p className="text-xs text-gray-500">{item.subject}</p>
-            </div>
+            <FormModal table="exam" type="update" data={item} />
+            <FormModal table="exam" type="delete" id={item.id} />
           </div>
-        );
-
-      case "teacher":
-        return item.teacher;
-
-      case "class":
-        return item.class;
-
-      case "date":
-        return item.date;
-
-      case "actions":
-        return (
-          <div className="flex items-center gap-2">
-            <Link href={`/list/teachers/${item.id}`}>
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaSky">
-                <Image src="/edit.png" alt="view" width={15} height={15} />
-              </button>
-            </Link>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaPurple">
-                <Image src="/delete.png" alt="delete" width={15} height={15} />
-              </button>
-            )}
-          </div>
-        );
-
-      default:
-        return item[column.accessor as keyof Exam] || "";
-    }
-  };
+        )}
+      </td>
+    </tr>
+  );
 
   return (
-    <div className="bg-white py-4 px-6 rounded-md flex-1 m-4 mt-0">
-      {/* Top */}
-      <div className="flex items-center justify-between">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+      {/* HEADER */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 mb-4">
         <h1 className="hidden md:block text-lg font-semibold">All Exams</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
-          <div className="flex items-center gap-4 self-end mb-1">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/filter.png" alt="filter" width={15} height={15} />
+          <div className="flex items-center gap-3">
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow cursor-pointer"
+              aria-label="Filter"
+            >
+              <Image src="/filter.png" alt="Filter" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/sort.png" alt="sort" width={15} height={15} />
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow cursor-pointer"
+              aria-label="Sort"
+            >
+              <Image src="/sort.png" alt="Sort" width={14} height={14} />
             </button>
-            {role === "admin" && (
-              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-                <Image src="/plus.png" alt="add" width={15} height={15} />
-              </button>
+            {(role === "admin" || role === "teacher") && (
+              <FormModal table="exam" type="create" />
             )}
           </div>
         </div>
       </div>
-
-      {/* List */}
+      {/* TABLE */}
       <Table columns={columns} renderRow={renderRow} data={examsData} />
-
-      {/* Pagination */}
+      {/* PAGINATION */}
       <Pagination />
     </div>
   );
 };
 
-export default ExamsListPage;
+export default ExamListPage;

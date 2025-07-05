@@ -1,7 +1,7 @@
 import Announcements from "@/components/Announcements";
-import BigCalendar from "@/components/BigCalendar";
+import BigCalendar from "@/components/BigCalender";
 import FormModal from "@/components/FormModal";
-import Performance from "@/components/Performace";
+import Performance from "@/components/Performance";
 import { role } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,10 +15,10 @@ const SingleTeacherPage = () => {
         <div className="flex flex-col lg:flex-row gap-4">
           {/* USER INFO CARD */}
           <div className="bg-lamaSky py-6 px-4 rounded-md flex-1 flex gap-4">
-            <div className="flex items-center justify-center">
+            <div className="w-2/3 flex items-center justify-center">
               <Image
                 src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="User avatar"
+                alt=""
                 width={144}
                 height={144}
                 className="w-36 h-36 rounded-full object-cover"

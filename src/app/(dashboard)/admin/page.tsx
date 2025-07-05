@@ -4,38 +4,38 @@ import CountChart from "@/components/CountChart";
 import EventCalendar from "@/components/EventCalendar";
 import FinanceChart from "@/components/FinanceChart";
 import UserCard from "@/components/UserCard";
-import React from "react";
 
-const AdminPage = () => {
+const AdminPage: React.FC = () => {
   return (
-    <div className="p-4 flex gap-4 flex-col md:flex-row">
-      {/* Left */}
-      <div className="w-full lg:w-2/3">
-        {/* User cards */}
-        <div className="flex gap-4 justify-between">
+    <div className="p-4 flex flex-col gap-4 md:flex-row">
+      {/* LEFT SIDE */}
+      <div className="flex flex-col gap-8 w-full lg:w-2/3">
+        {/* User Summary Cards */}
+        <div className="flex flex-wrap justify-between gap-4">
           <UserCard type="student" />
           <UserCard type="teacher" />
           <UserCard type="parent" />
           <UserCard type="staff" />
         </div>
-        {/* Middle charts */}
-        <div className="flex gap-4 flex-col lg:flex-row">
-          {/* Count chart */}
-          <div className="w-full lg:w-1/3 h-[450px]">
+
+        {/* Charts (Middle Section) */}
+        <div className="flex flex-col gap-4 lg:flex-row">
+          <div className="h-[450px] w-full lg:w-1/3">
             <CountChart />
           </div>
-          {/* Attendance chart */}
-          <div className="w-full lg:w-2/3 h-[450px]">
+          <div className="h-[450px] w-full lg:w-2/3">
             <AttendanceChart />
           </div>
         </div>
-        {/* Bottom charts */}
-        <div className="w-full h-[500px]">
+
+        {/* Finance Chart (Bottom Section) */}
+        <div className="h-[500px] w-full">
           <FinanceChart />
         </div>
       </div>
-      {/* Right */}
-      <div className="w-full lg:w-1/3 flex flex-col gap-8">
+
+      {/* RIGHT SIDE */}
+      <div className="flex flex-col gap-8 w-full lg:w-1/3">
         <EventCalendar />
         <Announcements />
       </div>

@@ -2,121 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Global ===== */
-* {
-  outline-color: white;
-}
-
-/* ===== React Calendar ===== */
+/* === Container do Calendário === */
 .react-calendar {
   width: 100% !important;
-  height: 100% !important;
-  font-family: "Inter", sans-serif !important;
   border: none !important;
+  font-family: "Inter", sans-serif !important;
 }
 
-.react-calendar__navigation__label__labelText {
-  font-weight: 600 !important;
+/* === Navegação === */
+.react-calendar__navigation__label {
+  font-weight: 600;
 }
 
+/* === Tile ativo (data selecionada) === */
 .react-calendar__tile--active {
   background-color: #c3ebfa !important;
   color: black !important;
 }
 
-/* ===== Big Calendar ===== */
+/* === React Big Calendar ajustes === */
 
-/* Toolbar */
+/* Esconder o grupo de botões esquerdo da toolbar */
 .rbc-btn-group:first-child {
   display: none !important;
 }
 
+/* Alinha o texto do label da toolbar à direita */
 .rbc-toolbar-label {
   text-align: right !important;
-  padding: 0px 20px !important;
+  padding: 0 20px !important;
 }
 
+/* Estilo do grupo de botões direito */
 .rbc-btn-group:last-child {
   font-size: 13px !important;
 }
 
+/* Botões do grupo direito */
 .rbc-btn-group:last-child button {
   border: none !important;
   background-color: #f1f0ff !important;
   margin-left: 2px !important;
 }
 
+/* Botão ativo da toolbar */
 .rbc-toolbar button.rbc-active {
   background-color: #dbdafe !important;
   box-shadow: none !important;
 }
 
-/* Time View */
+/* Grade e horários */
 .rbc-time-view {
   border-color: #eee !important;
 }
 
 .rbc-time-header {
-  display: none !important;
+  display: none !important; /* esconde a linha de horários no topo */
 }
 
 .rbc-time-content {
   border: none !important;
 }
 
+/* Fonte e padding dos horários no gutter */
 .rbc-time-gutter.rbc-time-column {
-  font-size: 14px !important;
+  font-size: 12px !important;
 }
 
 .rbc-time-gutter.rbc-time-column .rbc-timeslot-group {
-  padding: 8px 20px !important;
+  padding: 0 20px !important;
 }
 
+/* Fundo dos blocos de horário */
 .rbc-timeslot-group {
   background-color: #f7fdff !important;
 }
 
-/* Day View */
+/* Fonte para os slots de dia */
 .rbc-day-slot {
   font-size: 14px !important;
 }
 
-/* Events */
+/* Eventos do calendário */
 .rbc-event {
   border: none !important;
   color: black !important;
-  display: block !important;
-  padding: 8px !important;
-  width: fit-content !important;
-  min-width: 100% !important;
-  height: fit-content !important;
-  margin: 4px !important;
-  margin-top: 6px !important;
-  overflow: hidden !important;
+  padding: 10px !important;
+  margin: 10px !important;
+  width: 99% !important;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-weight: 500;
 }
 
-/* Event Colors (alternância visual) */
-.rbc-event:nth-child(1),
-.rbc-event:nth-child(5) {
+/* Cores alternadas para os eventos - simplificado e com mais variações */
+.rbc-event:nth-child(8n + 1) {
   background-color: #e2f8ff !important;
 }
-
-.rbc-event:nth-child(2),
-.rbc-event:nth-child(6) {
+.rbc-event:nth-child(8n + 2) {
   background-color: #fefce8 !important;
 }
-
-.rbc-event:nth-child(3),
-.rbc-event:nth-child(7) {
+.rbc-event:nth-child(8n + 3) {
   background-color: #f2f1ff !important;
 }
-
-.rbc-event:nth-child(4),
-.rbc-event:nth-child(8) {
+.rbc-event:nth-child(8n + 4) {
+  background-color: #fdf2fb !important;
+}
+.rbc-event:nth-child(8n + 5) {
+  background-color: #e2f8ff !important;
+}
+.rbc-event:nth-child(8n + 6) {
+  background-color: #fefce8 !important;
+}
+.rbc-event:nth-child(8n + 7) {
+  background-color: #f2f1ff !important;
+}
+.rbc-event:nth-child(8n + 8) {
   background-color: #fdf2fb !important;
 }
 
+/* Texto do label do evento */
 .rbc-event-label {
   color: gray !important;
-  margin-bottom: 5px !important;
+  margin-bottom: 5px;
+  font-weight: 600;
 }
